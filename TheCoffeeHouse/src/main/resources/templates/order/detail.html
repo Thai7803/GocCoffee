@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{:: main})}">
+
+<body>
+    <main th:object="${order}">
+
+        <!-- breadcrumb -->
+        <div class="container">
+            <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+                <a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
+                    Home
+                    <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+                </a>
+
+                <span class="stext-109 cl4">
+                    Order Detail
+                </span>
+            </div>
+        </div>
+
+        <!-- ***** Subscribe Area Starts ***** -->
+        <div class="subscribe">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <td>Order Number</td>
+                                    <td>Purchaser</td>
+                                    <td>Date</td>
+                                    <td>Address</td>
+                                    <td>Phone</td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><label th:text="*{id}"></label></td>
+                                    <td><label th:text="*{account.username}"></label></td>
+                                    <td><label th:text="*{createDate}"></label></td>
+                                    <td><label th:text="*{address}"></label></td>
+                                    <td><label>+(84) [[*{phone}]]</label></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="p-b-45">
+                            <h3 class="ltext-106 cl5 txt-center">
+                                Your order 
+                            </h3>
+                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <td>Id</td>
+                                    <td>Name</td>
+                                    <td></td>
+                                    <td>Price</td>
+                                    <td>Size</td>
+                                    <td>Quantity</td>
+                                    <td>Amount</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="detail: *{orderDetails}" th:object="${detail}">
+                                    <td>[[*{product.id}]]</td>
+                                    <td>[[*{product.name}]]</td>
+                                    <td>
+                                        <div class="how-itemcart1">
+                                            <img th:src="@{|/assets/images/*{product.image}|}" alt="IMG">
+                                        </div>
+                                    </td>
+                                    <td>$[[*{#numbers.formatDecimal(price, 0, 'COMMA', 2, 'POINT')}]]</td>
+                                    <td>[[*{size}]]</td>
+                                    <td>[[*{quantity}]]</td>
+                                    <td>$[[*{#numbers.formatDecimal(price*quantity, 0, 'COMMA', 2, 'POINT')}]]</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div>
+                            <!-- <label>Total
+                                <input type="text" disabled="disabled" th:field="*{amount}">
+                            </label> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ***** Subscribe Area Ends ***** -->
+
+
+
+        <!-- Shoping Cart -->
+
+
+    </main>
+</body>
+
+</html>

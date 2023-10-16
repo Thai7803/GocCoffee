@@ -1,0 +1,44 @@
+<div class="panel panel-default">
+	<table class="table table-striped">
+		<thead style="background-color: gray; color: dark; text-transform: uppercase; text-align: center;">
+			<tr>
+				<td>Id</td>
+				<td>Customer</td>
+				<td></td>
+				<td>Products</td>
+				<td>Price</td>
+				<td>Size</td>
+				<td>Quantity</td>
+				<td>Amount</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="item in pageDetail.orderdetails">
+
+				<th style="vertical-align: middle;">{{$index+1}}</th>
+				<th style="vertical-align: middle;">{{item.order.account.fullname}}</th>
+				<th style="vertical-align: middle;"> <img style="width: 100px; height: 100px"
+						src="/assets/images/{{item.product.image}}" alt="{{item.id}}"></th>
+				<th style="vertical-align: middle;">{{item.product.name}}</th>
+				<th style="vertical-align: middle;">$ {{item.price| number :2}}</th>
+				<th style="vertical-align: middle;">{{item.size}}</th>
+				<th style="vertical-align: middle;">{{item.quantity}}</th>
+				<th style="vertical-align: middle;">$ {{item.price*item.quantity| number :2}}</th>
+
+			</tr>
+		</tbody>
+	</table>
+	<div class="panel-footer text-center">
+		<button ng-click="pageDetail.first()" class="btn btn-dark"><span class="glyphicon glyphicon-arrow-left"></span></button>
+		<button ng-click="pageDetail.prev()" class="btn btn-dark">
+		 <span class="glyphicon glyphicon-chevron-left"></span>
+		</button>
+		<button class="btn btn-dark"> <b>{{pageDetail.page + 1}} of {{pageDetail.count}}</b> </button>
+		<button ng-click="pageDetail.next()" class="btn btn-dark">
+			  <span class="glyphicon glyphicon-chevron-right"></span>
+		</button>
+		<button ng-click="pageDetail.last()" class="btn btn-dark">
+			<span class="glyphicon glyphicon-arrow-right"></span>
+		</button>
+	</div>
+</div>
