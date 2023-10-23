@@ -28,7 +28,7 @@ public class Product implements Serializable {
 	String name;
 	String image;
 
-	String size;
+	// String size;
 	Double price;
 	@Temporal(TemporalType.DATE)
 	@Column(name = "Createdate")
@@ -48,7 +48,7 @@ public class Product implements Serializable {
 		this.id = id;
 		this.name = name;
 		this.image = image;
-		this.size = size;
+		// this.size = size;
 		this.price = price;
 		this.createDate = createDate;
 		this.available = available;
@@ -56,13 +56,13 @@ public class Product implements Serializable {
 		this.orderDetails = orderDetails;
 	}
 
-	public String getSize() {
-		return size;
-	}
+	// public String getSize() {
+	// 	return size;
+	// }
 
-	public void setSize(String size) {
-		this.size = size;
-	}
+	// public void setSize(String size) {
+	// 	this.size = size;
+	// }
 
 	public Product() {
 		super();
