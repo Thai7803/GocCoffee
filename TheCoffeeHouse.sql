@@ -30,7 +30,22 @@ CREATE TABLE Orders(
 	Address nvarchar(100),
     FOREIGN KEY (Username) REFERENCES Accounts (Username)
     );
-    
+
+CREATE TABLE Categories(
+	Id char(4) primary key,
+	Name nvarchar(50)
+);
+CREATE TABLE Products(
+	Id int primary key AUTO_INCREMENT,
+	Name nvarchar(50),
+	Image nvarchar(50),
+	Price float,
+	CreateDate date,
+	Available bit,
+	CategoryId char(4),
+    FOREIGN KEY (CategoryId) REFERENCES Categories (Id)
+);
+
     CREATE TABLE OrderDetails(
 	Id bigint primary key AUTO_INCREMENT,
 	OrderId bigint,
@@ -43,16 +58,11 @@ CREATE TABLE Orders(
     FOREIGN KEY (ProductId) REFERENCES Products (Id)
 );
 
-CREATE TABLE Products(
-	Id int primary key AUTO_INCREMENT,
-	Name nvarchar(50),
-	Image nvarchar(50),
-	Price float,
-	CreateDate date,
-	Available bit,
-	CategoryId char(4),
-    FOREIGN KEY (CategoryId) REFERENCES Categories (Id)
-);
+INSERT INTO Categories
+VALUES
+('Cafe','Coffee'),
+('Cake','Cakes & Snacks'),
+('Tea','Tea');
 
 INSERT INTO Products (Name, Image, Price, CreateDate, Available, CategoryId)
 VALUES
@@ -96,24 +106,6 @@ VALUES
 ('40','Macadamia Pearl Milk Tea','Macadamia Pearl Milk Tea.jpg','4','2023-12-12',NULL,'Tea'),
 ('41','Oolong Roasted Pearl Milk Tea Chai Fresh 500ML','Oolong Roasted Pearl Milk Tea Chai Fresh 500ML.jpg','5','2023-12-12',NULL,'Tea');
 
-CREATE TABLE Categories(
-	Id char(4) primary key,
-	Name nvarchar(50)
-);
-INSERT INTO Categories
-VALUES
-('Cafe','Coffee'),
-('Cake','Cakes & Snacks'),
-('Tea','Tea');
-
-select * from Categories;
-CREATE TABLE Students(
-	email nvarchar(50) primary key,
-	Fullname nvarchar(50),
-	marks float,
-	gender bit,
-	country  nvarchar(2)
-);
 
 
 
