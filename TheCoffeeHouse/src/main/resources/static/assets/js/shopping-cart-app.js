@@ -5,6 +5,15 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
 
     QUẢN LÝ GIỎ HÀNG
     */
+    $scope.decreaseQuantity = function(item) {
+        if (item.qty > 1) {
+            item.qty--;
+        }
+    };
+
+    $scope.increaseQuantity = function(item) {
+        item.qty++;
+    };
 
     $scope.cart = {
         items: [],
@@ -79,26 +88,35 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
                 }
             });
         },
-
-
         purchase() {
             var order = angular.copy(this);
-            if ($scope.cart.count == 0) {
-                alert("Please add product to cart!")
-                console.log(error)
+        
+            if ($scope.cart.count === 0) {
+                alert("Vui lòng thêm sản phẩm vào giỏ hàng!");
+                console.error("Giỏ hàng trống. Không thể đặt hàng.");
             } else {
-                //thực hiện đặt hàng
-                $http.post("/rest/orders", order).then(resp => {
-                    alert("Order successfully!");
-                    $scope.cart.clear();
-                    location.href = "/order/detail/" + resp.data.id;
-                }).catch(error => {
-                    alert("Please fill in your delivery address, phone number and size!")
-                    console.log(error)
-                })
-            }
+                // Kiểm tra xem các trường cần thiết đã được điền đầy đủ chưa
+                if (!order.address || !order.phone) {
+                    alert("Vui lòng điền địa chỉ giao hàng và số điện thoại!");
+                    console.error("Chi tiết đơn hàng chưa đầy đủ. Không thể đặt hàng.");
+                    console.error(error);
 
+                } else {
+                    // Thử đặt hàng
+                    $http.post("/rest/orders", order)
+                        .then(resp => {
+                            alert("Đặt hàng thành công!");
+                            $scope.cart.clear();
+                            location.href = "/order/detail/" + resp.data.id;
+                        })
+                        .catch(error => {
+                            alert("Đã xảy ra lỗi khi đặt hàng. Vui lòng thử lại sau.");
+                            console.error("Lỗi khi đặt hàng:", error);
+                        });
+                }
+            }
         }
+        
 
     }
 
