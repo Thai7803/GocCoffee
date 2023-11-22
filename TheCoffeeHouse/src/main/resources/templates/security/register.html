@@ -1,8 +1,20 @@
 <div xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+<!-- Bootstrap CSS CDN link -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap JS bundle (popper.js included) CDN link -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<style>
+	.invalid-feedback{
+		font-size: 14px;
+		font-weight: 600;
+		text-align: left;
+	}
+</style>
     <main>
+		
 
-
-        <form class="bg0 p-t-75 p-b-85" th:action="@{/security/register}" method="post">
+        <form class="bg0 p-t-75 p-b-85" th:action="@{/security/register}" method="post" th:object="${account}">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
@@ -17,7 +29,8 @@
 
                                 <div class="bor8 bg0 m-b-12">
                                     <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="username"
-                                        placeholder="User name" required>
+                                        placeholder="User name" th:field="*{username}">
+                                    <p th:if="${#fields.hasErrors('username')}" class="text-danger" th:errors="*{username}"></p>
                                 </div>
 
                                 <div class="size-208">
@@ -28,7 +41,8 @@
 
                                 <div class="bor8 bg0 m-b-22">
                                     <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="password" name="password"
-                                        placeholder="Your password" required>
+                                        placeholder="Your password" th:field="*{password}">
+                                    <p th:if="${#fields.hasErrors('password')}" class="text-danger" th:errors="*{password}"></p>                                        
                                 </div>
 
                                 <div class="size-208">
@@ -39,7 +53,8 @@
 
                                 <div class="bor8 bg0 m-b-12">
                                     <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="fullname"
-                                        placeholder="Full name" required>
+                                        placeholder="Full name" th:field="*{fullname}">
+                                    <p th:if="${#fields.hasErrors('fullname')}" class="text-danger" th:errors="*{fullname}"></p>                                       
                                 </div>
 
                                 <div class="size-208">
@@ -49,17 +64,20 @@
                                 </div>
 
                                 <div class="bor8 bg0 m-b-22">
-                                    <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="email" name="email"
-                                        placeholder="Email" required>
+                                    <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="email"
+                                        placeholder="Email" th:field="*{email}">
+                                    <p th:if="${#fields.hasErrors('email')}" class="text-danger" th:errors="*{email}"></p>
                                 </div>
-                                <p class="stext-111 cl6 p-t-2">
-                                    [[${message}]]
-                                </p>
+                                <!-- <div class="error-message">
+                                	<p class="stext-111 cl6 p-t-2">
+                                    	[[${message}]]
+                                	</p>
+                                </div> -->
                             </div>
 
                             <div class="flex-w flex-t p-t-27 p-b-33">
                                 <button formaction="/register/create"
-                                    class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+                                    class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer" type="submit" data-bs-toggle="modal" data-bs-target="#errorModal">
                                     Register
                                 </button>
                             </div>
@@ -67,6 +85,26 @@
                     </div>
                 </div>
             </div>
+            <!-- Error Modal -->
+			<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+			    <div class="modal-dialog modal-dialog-centered">
+			        <div class="modal-content">
+			            <div class="modal-header">
+			                <h5 class="modal-title" id="errorModalLabel">Error</h5>
+			                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			            </div>
+			            <div class="modal-body">
+			                <p class="stext-111 cl6 p-t-2" id="errorMessage">
+			                    <p th:if="${#fields.hasErrors('username')}" class="text-danger" th:errors="*{username}"></p>
+			                </p>
+			            </div>
+			            <div class="modal-footer">
+			                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+			            </div>
+			        </div>
+			    </div>
+			</div>
         </form>
     </main>
 </div>
+
