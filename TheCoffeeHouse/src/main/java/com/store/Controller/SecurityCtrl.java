@@ -5,13 +5,21 @@ import java.util.Optional;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.store.SecurityConfig;
 import com.store.DAO.AccountDAO;
 import com.store.entity.Account;
+import com.store.entity.UserForm;
 import com.store.service.AccountService;
 import com.store.service.Impl.MailerServiceImpl;
 import com.store.utils.ParamService;
@@ -56,7 +65,17 @@ public class SecurityCtrl {
 	
 //	
 	
+	private static final Logger log = LoggerFactory.getLogger(SecurityCtrl.class);
 	
+	@InitBinder
+	public void initBinder(WebDataBinder dataBinder) {
+		StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
+		dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
+	}
+	@GetMapping("/security/register")
+	public String getPage(Account account) {
+		return "security/register";
+	}
 	@RequestMapping("/security/register")
 	public String register(Model model) {
 		Account item = new Account();
@@ -64,8 +83,12 @@ public class SecurityCtrl {
 		return "security/register";
 	}
 	@RequestMapping("/register/create")
-	public String create(Model model, Account item) {
-		accountDAO.save(item);
+	public String create(@Valid @ModelAttribute("account") Account account, BindingResult result, Model model) {
+		if(result.hasErrors()) {
+			model.addAttribute("account", account);
+			return "security/register";
+		}
+		accountDAO.save(account);
 		model.addAttribute("message", "Insert successfully");
 		return "security/login";
 	}
