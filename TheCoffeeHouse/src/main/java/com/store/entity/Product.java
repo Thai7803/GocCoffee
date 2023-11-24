@@ -28,7 +28,6 @@ public class Product implements Serializable {
 	String name;
 	String image;
 
-	// String size;
 	Double price;
 	@Temporal(TemporalType.DATE)
 	@Column(name = "Createdate")
@@ -40,29 +39,34 @@ public class Product implements Serializable {
 	@JsonIgnore
 	@OneToMany(mappedBy = "product")
 	List<OrderDetail> orderDetails;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "product")
+	List<Comment> comments;
 
 
-	public Product(Integer id, String name, String image, String size, Double price, Date createDate, Boolean available,
-			Category category, List<OrderDetail> orderDetails) {
+
+	public Product(Integer id, String name, String image, Double price, Date createDate, Boolean available,
+			Category category, List<OrderDetail> orderDetails, List<Comment> comments) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.image = image;
-		// this.size = size;
 		this.price = price;
 		this.createDate = createDate;
 		this.available = available;
 		this.category = category;
 		this.orderDetails = orderDetails;
+		this.comments = comments;
 	}
 
-	// public String getSize() {
-	// 	return size;
-	// }
+	public List<Comment> getComments() {
+		return comments;
+	}
 
-	// public void setSize(String size) {
-	// 	this.size = size;
-	// }
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
 
 	public Product() {
 		super();
