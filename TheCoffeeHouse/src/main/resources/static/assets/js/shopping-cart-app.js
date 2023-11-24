@@ -76,7 +76,7 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
 
     $scope.order = {
         createDate: new Date(),
-        action: "Chưa xác nhận",
+        action: "Huỷ xác nhận",
         account: { username: $("#username").text() },
         get orderDetails() {
             return $scope.cart.items.map(item => {
@@ -116,9 +116,5 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
                 }
             }
         }
-        
-
     }
-
-
 })
