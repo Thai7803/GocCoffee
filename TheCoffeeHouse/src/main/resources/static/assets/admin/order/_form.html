@@ -1,49 +1,63 @@
-<div class="panel panel-default">
-	<div class="panel-body">
-		<div class="row">
-			<div class="col-sm-3 text-center">
-			</div>
-			<div class="col-sm-12">
-				<div class="row">
-					<div class="form-group col-sm-6">
-						<label>Name</label>
-						<input ng-model="form.account.fullname" class="form-control">
-					</div>
-					<div class="form-group col-sm-6">
-						<label>Address</label>
-						<input ng-model="form.address" class="form-control">
-					</div>
+    <!-- Main content -->
+    <section class="content">
+		<div class="container-fluid">
+		  <div class="row">
+			<!-- left column -->
+			<div class="col-md-12">
+			  <!-- general form elements -->
+			  <div class="card card-warning">
+				<div class="card-header">
+				  <h3 class="card-title">Order-Infomation</h3>
 				</div>
-				<div class="row">
-					<div class="form-group col-sm-6">
-						<label>Date</label>
-						<input ng-model="form.createDate" type="date" class="form-control">
+				<!-- /.card-header -->
+				<!-- form start -->
+				<form> 
+				  <div class="card-body">
+					<div class="row">
+						<div class="form-group col-sm-6">
+							<label>Name</label>
+						    <input ng-model="form.account.fullname" placeholder="Name" class="form-control">
+						</div>
+						<div class="form-group col-sm-6">
+							<label>Address</label>
+							<input ng-model="form.address" placeholder="Address" class="form-control">
+						</div>
 					</div>
-					<div class="form-group col-sm-6">
-						<label>Phone</label>
-						<input ng-model="form.phone" type="number" class="form-control">
+					<div class="row">
+						<div class="form-group col-sm-6">
+							<label>Date</label>
+					     	<input ng-model="form.createDate" type="date" class="form-control">
+						</div>
+						<div class="form-group col-sm-6">
+							<label>Phone</label>
+							<input ng-model="form.phone" type="number" class="form-control">
+						</div>
 					</div>
-				</div>
-
-				<div class="row">
-					<div class="form-group col-sm-6">
-						<label>Action</label>
-						<select ng-model="form.action" class="form-control">
-							<option ng-field="Chưa xác nhận">Chưa xác nhận</option>
+					<div class="row">
+						<div class="form-group col-sm-6">
+							<label>Action</label>
+					    	<select ng-model="form.action" class="form-control">
+							<option ng-field="Đã huỷ xác nhận">Đã huỷ xác nhận</option>
+							<option ng-field="Huỷ xác nhận">Huỷ xác nhận</option>
+							<option ng-field="Đang xác nhận">Đang xác nhận</option>
 							<option ng-field="Đang vận chuyển">Đang vận chuyển</option>
-							<option ng-field="Đã giao">Đã giao</option>
-						</select>
+							<option ng-field="Đã nhận được hàng">Đã nhận được hàng</option>
+							<option ng-field="Đã giao thành công">Đã giao thành công</option>
+
+						   </select>
+						</div>
 					</div>
-				</div>
+				  </div>
+				  <!-- /.card-body -->
+				</form>
+				<div class="card-footer text-center">
+					<button type="submit" ng-click="update()" class="btn btn-success">Update</button>
+					<button type="submit" ng-click="delete(form)" class="btn btn-danger">Delete</button>
+			  </div>
+			  <!-- /.card -->
 			</div>
-		</div>
-	</div>
-	<div class="panel-footer text-center">
-		<button ng-click="update()" class="btn btn-primary">
-			<i class="glyphicon glyphicon-save"></i> Update
-		</button>
-		<button ng-click="delete(form)" class="btn btn-primary">
-			<i class="glyphicon glyphicon-trash"></i> Delete
-		</button>
-	</div>
-</div>
+		  </div>
+		  <!-- /.row -->
+		</div><!-- /.container-fluid -->
+	  </section>
+	  <!-- /.content -->
