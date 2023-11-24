@@ -1,33 +1,64 @@
-<div class="panel panel-default">
-	<table class="table table-striped">
-		<thead style="background-color: gray; color: dark; text-transform: uppercase; text-align: center;">
-			<tr>
-				<th>No.</th>
-				<!-- <th>ID</th> -->
-				<th>Fullname</th>
-				<th>Date</th>
-				<th>Address</th>
-				<th>Phone</th>
-				<th>Action</th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="item in orders">
-				<th style="vertical-align: middle;">{{$index+1}}</th>
-				<!-- <th style="vertical-align: middle;">{{item.id}}</th> -->
-				<th style="vertical-align: middle;">{{item.account.fullname}}</th>
-				<th style="vertical-align: middle;">{{item.createDate}}</th>
-				<th style="vertical-align: middle;">{{item.address}}</th>
-				<th style="vertical-align: middle;">+(84) {{item.phone}}</th>
-				<th style="vertical-align: middle;">{{item.action}}</th>
-				<th>
-					<button ng-click="edit(item)" class="btn btn-primary" style="margin-right: 10px;"><span
-							class="glyphicon glyphicon-edit"></span></button>
-				</th>
-
-			</tr>
-		</tbody>
-		
-	</table>
-</div>
+    <!-- Main content -->
+    <section class="content">
+		<div class="container-fluid">
+		  <div class="row">
+			<div class="col-12">
+			  <div class="card">
+				<div class="card-header">
+				  <h3 class="card-title">DataTable Order</h3>
+				</div>
+				<!-- /.card-header -->
+				<div class="card-body">
+				  <table id="example2" class="table table-bordered table-hover">
+					<thead>
+					<tr>
+						<th>No.</th>
+						<!-- <th>ID</th> -->
+						<th>Fullname</th>
+						<th>Date</th>
+						<th>Address</th>
+						<th>Phone</th>
+						<th>Action</th>
+						<th></th>
+					</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="item in orders">
+							<th style="vertical-align: middle;">{{$index+1}}</th>
+							<!-- <th style="vertical-align: middle;">{{item.id}}</th> -->
+							<th style="vertical-align: middle;">{{item.account.fullname}}</th>
+							<th style="vertical-align: middle;">{{item.createDate}}</th>
+							<th style="vertical-align: middle;"> <i class="fas fa-map-marker"></i> {{item.address}}</th>
+							<th style="vertical-align: middle;">+(84) {{item.phone}}</th>
+							<th style="vertical-align: middle;" ng-style="{'color': item.action === 'Huỷ xác nhận' || item.action === 'Đã huỷ xác nhận' ? 'red' : 'rgb(76, 224, 76)'}">
+								{{ item.action }}
+							</th>
+							
+							<th>
+								<button ng-click="edit(item)" class="btn btn-primary">Edit</button>
+							</th>
+			
+						</tr>
+					</tbody>
+					<!-- <tfoot>
+					<tr>
+					  <th>Rendering engine</th>
+					  <th>Browser</th>
+					  <th>Platform(s)</th>
+					  <th>Engine version</th>
+					  <th>CSS grade</th>
+					</tr>
+					</tfoot> -->
+				  </table>
+				</div>
+				<!-- /.card-body -->
+			  </div>
+			  <!-- /.card -->
+			</div>
+			<!-- /.col -->
+		  </div>
+		  <!-- /.row -->
+		</div>
+		<!-- /.container-fluid -->
+	  </section>
+	  <!-- /.content -->
