@@ -45,6 +45,16 @@ CREATE TABLE Products(
 	CategoryId char(4),
     FOREIGN KEY (CategoryId) REFERENCES Categories (Id)
 );
+CREATE TABLE Comments(
+	Id int primary key AUTO_INCREMENT,
+	Username nvarchar(50),
+	ProductId int,
+	Rate int,
+	CreateDate date,
+	Available bit,
+    FOREIGN KEY (Username) REFERENCES Accounts (Username),
+	FOREIGN KEY (ProductId) REFERENCES Products (Id)
+);
 
     CREATE TABLE OrderDetails(
 	Id bigint primary key AUTO_INCREMENT,
