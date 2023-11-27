@@ -20,13 +20,13 @@ public interface ProductDAO extends JpaRepository<Product, Integer>{
 	List<Product> findByKeywords(String string);
 
 	
-	@Query("select o from Product o where o.price between 1 and 2")
+	@Query("select o from Product o where o.price between 1 and 2 order by price")
 	List<Product> findByPriceBetween(double minPrice, double maxPrice);
 	
-	@Query("select o from Product o where o.price between 2 and 4")
+	@Query("select o from Product o where o.price between 2 and 4 order by price")
 	List<Product> findByPriceBetween2(double minPrice, double maxPrice);
 
-	@Query("select o from Product o where o.price >= 4")
+	@Query("select o from Product o where o.price >= 4 order by price")
 	List<Product> findByPrice4(double maxPrice);
 
 
